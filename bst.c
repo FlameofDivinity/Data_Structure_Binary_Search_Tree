@@ -8,7 +8,24 @@
  */
 void bs_put(BST *ptree, int x)
 {
-        // Функцийг хэрэгжүүлнэ үү
+        if(bs_get(ptree, x) != NULL)
+                return;
+
+        Elm *newNode = malloc(sizeof(Elm));
+        if( newNode == NULL)
+                return NULL;
+        newNode->x = x;
+        newNode->height = 1;
+        newNode->len = 1;
+        newNode->L = NULL;
+        newNode->R = NULL;
+        return newNode;
+
+        if(ptree->root == NULL){
+                ptree->root = newNode;
+                return;
+        }
+        
 }
 
 /*
@@ -18,7 +35,16 @@ void bs_put(BST *ptree, int x)
  */
 Elm *bs_get(const BST *ptree, int x)
 {
-        // Функцийг хэрэгжүүлнэ үү
+        Elm *Node = ptree->root;
+        while (Node != NULL){
+                if(x < Node->x)
+                        Node = Node->L;
+                else if(x > Node->x)
+                        Node = Node->R;
+                else 
+                        return Node;
+        } 
+        return NULL;
 }
 
 /*
